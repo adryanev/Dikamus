@@ -14,16 +14,16 @@ Untuk menyelesaikan modul database, Anda harus membuat aplikasi kamus terjemahan
 **Contoh Aplikasi**
 
 1.  Preload data.
-    ![20170703061146f110d8c9508173fe30092ca01fbbfe7a.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061146f110d8c9508173fe30092ca01fbbfe7a.png)
+    ![https://dicodingacademy.blob.core.windows.net/academies/20170703061146f110d8c9508173fe30092ca01fbbfe7a.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061146f110d8c9508173fe30092ca01fbbfe7a.png)
 2.  Menu English-Indonesia, Indonesia-English.
-    ![201707030615017b3fb1a37c2c2c377fc1b3ce20cdd9f5.png](https://dicodingacademy.blob.core.windows.net/academies/201707030615017b3fb1a37c2c2c377fc1b3ce20cdd9f5.png)
+    ![https://dicodingacademy.blob.core.windows.net/academies/201707030615017b3fb1a37c2c2c377fc1b3ce20cdd9f5.png](https://dicodingacademy.blob.core.windows.net/academies/201707030615017b3fb1a37c2c2c377fc1b3ce20cdd9f5.png)
 
 3.  Search Kata Kamus.
-    ![20170703061524eb975a24ebd3e28172d975908d498a57.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061524eb975a24ebd3e28172d975908d498a57.png)
+    ![https://dicodingacademy.blob.core.windows.net/academies/20170703061524eb975a24ebd3e28172d975908d498a57.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061524eb975a24ebd3e28172d975908d498a57.png)
 
 4.  Detail Kamus.
 
-    ![20170703061559a9b7842442b673c1013bde0d0e55a5bc.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061559a9b7842442b673c1013bde0d0e55a5bc.png)
+    ![https://dicodingacademy.blob.core.windows.net/academies/20170703061559a9b7842442b673c1013bde0d0e55a5bc.png](https://dicodingacademy.blob.core.windows.net/academies/20170703061559a9b7842442b673c1013bde0d0e55a5bc.png)
 
 **Hint**
 
