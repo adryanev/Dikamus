@@ -1,27 +1,29 @@
 package com.adryanev.dikamus.ui.main;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.adryanev.dikamus.R;
-import com.adryanev.dikamus.data.entity.EnglishIndonesia;
 import com.adryanev.dikamus.ui.main.english_indonesia.EnglishIndonesiaFragment;
 import com.adryanev.dikamus.ui.main.indonesia_english.IndonesiaEnglishFragment;
 import com.adryanev.dikamus.utils.ActivityUtils;
+
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,9 +37,13 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         fragmentManager = getSupportFragmentManager();
-         mainFrame = findViewById(R.id.main_frame);
-         ActivityUtils.replaceFragment(fragmentManager, EnglishIndonesiaFragment.newInstance(),R.id.main_frame);
+        fragmentManager = getSupportFragmentManager();
+        mainFrame = findViewById(R.id.main_frame);
+        if(savedInstanceState == null){
+            Timber.d("SavedInstance: null");
+            ActivityUtils.replaceFragment(fragmentManager, EnglishIndonesiaFragment.newInstance(),R.id.main_frame);
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

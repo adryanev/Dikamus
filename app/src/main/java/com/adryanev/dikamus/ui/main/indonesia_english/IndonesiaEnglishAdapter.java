@@ -1,9 +1,9 @@
 package com.adryanev.dikamus.ui.main.indonesia_english;
 
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,15 +24,19 @@ public class IndonesiaEnglishAdapter extends RecyclerView.Adapter<IndonesiaEngli
 
     Context context;
     List<IndonesiaEnglish> data;
-    public IndonesiaEnglishAdapter(Context context, List<IndonesiaEnglish> data){
+    public IndonesiaEnglishAdapter(Context context){
         this.context = context;
-        this.data = data;
     }
     @NonNull
     @Override
     public IndonesiaEnglishViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_pencarian,viewGroup,false);
         return new IndonesiaEnglishViewHolder(view);
+    }
+
+    public void setData(List<IndonesiaEnglish> data) {
+        this.data = data;
+        notifyDataSetChanged();
     }
 
     @Override

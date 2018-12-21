@@ -1,10 +1,10 @@
 package com.adryanev.dikamus.data.dao;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
 
 import com.adryanev.dikamus.data.entity.EnglishIndonesia;
 
@@ -20,10 +20,10 @@ import java.util.List;
 @Dao
 public interface EnglishIndonesiaDao {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(EnglishIndonesia englishIndonesa);
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertList(List<EnglishIndonesia> list);
 
     @Query("DELETE From english_indonesia")

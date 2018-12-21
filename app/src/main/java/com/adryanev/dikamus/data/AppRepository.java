@@ -1,7 +1,7 @@
 package com.adryanev.dikamus.data;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 
 import com.adryanev.dikamus.data.dao.EnglishIndonesiaDao;
 import com.adryanev.dikamus.data.dao.IndonesiaEnglishDao;
@@ -9,6 +9,8 @@ import com.adryanev.dikamus.data.entity.EnglishIndonesia;
 import com.adryanev.dikamus.data.entity.IndonesiaEnglish;
 
 import java.util.List;
+
+import timber.log.Timber;
 
 /**
  * Project: Dikamus
@@ -29,6 +31,8 @@ public class AppRepository {
         AppDatabase db = AppDatabase.getDatabase(application);
         enInDao = db.enInDao();
         inEnDao = db.inEnDao();
+        Timber.d("Db isOpen: %b", db.isOpen());
+
     }
 
     public LiveData<List<EnglishIndonesia>> searchKataIndo(String text){

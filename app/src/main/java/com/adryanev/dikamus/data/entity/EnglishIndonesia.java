@@ -1,8 +1,11 @@
 package com.adryanev.dikamus.data.entity;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
 /**
  * Project: Dikamus
@@ -12,7 +15,7 @@ import android.support.annotation.NonNull;
  * Time: 3:46 PM
  */
 @Entity(tableName = "english_indonesia")
-public class EnglishIndonesia {
+public class EnglishIndonesia implements Parcelable {
     @PrimaryKey
     @NonNull
     private String kata;
@@ -42,4 +45,33 @@ public class EnglishIndonesia {
     }
 
     private String keterangan;
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.kata);
+        dest.writeString(this.keterangan);
+    }
+
+    protected EnglishIndonesia(Parcel in) {
+        this.kata = in.readString();
+        this.keterangan = in.readString();
+    }
+
+    public static final Creator<EnglishIndonesia> CREATOR = new Creator<EnglishIndonesia>() {
+        @Override
+        public EnglishIndonesia createFromParcel(Parcel source) {
+            return new EnglishIndonesia(source);
+        }
+
+        @Override
+        public EnglishIndonesia[] newArray(int size) {
+            return new EnglishIndonesia[size];
+        }
+    };
 }

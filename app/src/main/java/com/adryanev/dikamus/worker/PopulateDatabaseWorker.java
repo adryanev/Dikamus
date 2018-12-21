@@ -1,7 +1,7 @@
 package com.adryanev.dikamus.worker;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.adryanev.dikamus.data.AppDatabase;
 import com.adryanev.dikamus.data.entity.EnglishIndonesia;
@@ -25,18 +25,15 @@ import timber.log.Timber;
  * Time: 6:10 PM
  */
 public class PopulateDatabaseWorker extends Worker {
-    private Context context = getApplicationContext();
-    List<EnglishIndonesia> enInList = new ArrayList<>();
-    List<IndonesiaEnglish> inEnList = new ArrayList<>();
-    BufferedReader enInReader;
-    BufferedReader inEnReader;
-    InputStream enInStream;
-    InputStream inEnStream;
-    AppDatabase database = AppDatabase.getDatabase(context);
+    private Context context;
+    private List<EnglishIndonesia> enInList = new ArrayList<>();
+    private List<IndonesiaEnglish> inEnList = new ArrayList<>();
+    private AppDatabase database = AppDatabase.getDatabase(getApplicationContext());
 
 
     public PopulateDatabaseWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
+        this.context = context;
     }
 
     @NonNull
@@ -44,29 +41,27 @@ public class PopulateDatabaseWorker extends Worker {
     public Result doWork() {
         Timber.d("Starting PopulateDatabaseWorker");
         try {
-             enInStream = context.getAssets().open("english_indonesia");
-             inEnStream = context.getAssets().open("indonesia_english");
+            InputStream enInStream = getApplicationContext().getAssets().open("english_indonesia");
+            Timber.d("enInStream: %s",enInStream.toString());
+            InputStream inEnStream = getApplicationContext().getAssets().open("indonesia_english");
 
-            enInReader = new BufferedReader(new InputStreamReader(enInStream));
-            inEnReader = new BufferedReader(new InputStreamReader(inEnStream));
+            BufferedReader enInReader = new BufferedReader(new InputStreamReader(enInStream));
+            BufferedReader inEnReader = new BufferedReader(new InputStreamReader(inEnStream));
 
-            String enInLine = null;
+            String enInLine;
             Timber.d("Reading File");
-            do{
-                enInLine = enInReader.readLine();
+            while ((enInLine = enInReader.readLine()) != null){
                 String[] split = enInLine.split("\t");
                 EnglishIndonesia data = new EnglishIndonesia(split[0],split[1]);
                 enInList.add(data);
-
-
-            }while (enInLine != null);
-            String inEnLine = null;
-            do{
-                inEnLine = inEnReader.readLine();
+            }
+            String inEnLine;
+            while((inEnLine = inEnReader.readLine()) != null){
                 String[] split = inEnLine.split("\t");
                 IndonesiaEnglish data = new IndonesiaEnglish(split[0],split[1]);
                 inEnList.add(data);
-            }while (inEnLine != null);
+            }
+
             Timber.d("Insert to Database");
             database.enInDao().insertList(enInList);
             database.inEnDao().insertList(inEnList);
