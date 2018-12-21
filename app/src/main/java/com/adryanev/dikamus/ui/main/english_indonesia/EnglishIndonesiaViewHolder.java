@@ -1,4 +1,4 @@
-package com.adryanev.dikamus.ui.main.indonesia_english;
+package com.adryanev.dikamus.ui.main.english_indonesia;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -6,20 +6,21 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.adryanev.dikamus.R;
+import com.google.android.material.card.MaterialCardView;
 
 /**
  * Project: Dikamus
  *
  * @author Adryan Eka Vandra <adryanekavandra@gmail.com>
  * Date: 12/20/2018
- * Time: 8:14 PM
+ * Time: 9:39 PM
  */
-public class IndonesiaEnglishViewHolder extends RecyclerView.ViewHolder {
-
+class EnglishIndonesiaViewHolder extends RecyclerView.ViewHolder {
+    MaterialCardView cardView;
     TextView item;
-    public IndonesiaEnglishViewHolder(@NonNull View itemView) {
+    public EnglishIndonesiaViewHolder(@NonNull View itemView) {
         super(itemView);
         item = itemView.findViewById(R.id.text_cari);
-
+        cardView = itemView.findViewById(R.id.card_cari);
     }
 }

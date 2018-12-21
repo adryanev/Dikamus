@@ -1,20 +1,25 @@
 package com.adryanev.dikamus.data;
 
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.adryanev.dikamus.R;
 import com.adryanev.dikamus.worker.PopulateDatabaseWorker;
 import com.adryanev.dikamus.data.dao.EnglishIndonesiaDao;
 import com.adryanev.dikamus.data.dao.IndonesiaEnglishDao;
 import com.adryanev.dikamus.data.entity.EnglishIndonesia;
 import com.adryanev.dikamus.data.entity.IndonesiaEnglish;
 
+
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
+import timber.log.Timber;
 
 /**
  * Project: Dikamus
@@ -23,33 +28,54 @@ import androidx.work.WorkManager;
  * Date: 12/20/2018
  * Time: 6:00 PM
  */
-@Database(entities = {EnglishIndonesia.class, IndonesiaEnglish.class}, version = 1)
+@Database(entities = {EnglishIndonesia.class, IndonesiaEnglish.class}, version = 1,exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract EnglishIndonesiaDao enInDao();
     public abstract IndonesiaEnglishDao inEnDao();
-    private static WorkManager workManager = WorkManager.getInstance();
-
+    static String tag = "seed";
     private static volatile AppDatabase INSTANCE;
 
     public static AppDatabase getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (AppDatabase.class){
                 if(INSTANCE == null){
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,"app_database")
-                            .fallbackToDestructiveMigration().addCallback(roomDatabaseCallback).build();
+                    Timber.d("Creating Database");
+                    INSTANCE = buildDatabase(context);
                 }
             }
         }
-
         return INSTANCE;
     }
 
+    private static AppDatabase buildDatabase(Context context) {
+        Timber.d("Building, Room");
+        return Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class,"dikamus_database")
+                .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
+                .addCallback(roomDatabaseCallback)
+                .build();
+
+    }
+
     private static RoomDatabase.Callback roomDatabaseCallback = new RoomDatabase.Callback(){
+
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-            OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(PopulateDatabaseWorker.class).build();
-            workManager.enqueue(request);
+            Timber.d("onOpen Sqlite");
+            Timber.d("Statring PopulateDatabaseWorker");
+            OneTimeWorkRequest request = new OneTimeWorkRequest.Builder(PopulateDatabaseWorker.class).addTag(tag).build();
+
+            WorkManager wm =  WorkManager.getInstance();
+            wm.enqueue(request);
+
+
+        }
+
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            super.onCreate(db);
+
         }
     };
 

@@ -1,9 +1,9 @@
 package com.adryanev.dikamus.ui.main.indonesia_english;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 
 import com.adryanev.dikamus.data.AppRepository;
 import com.adryanev.dikamus.data.entity.IndonesiaEnglish;
