@@ -29,14 +29,14 @@ public class TerjemahanActivity extends AppCompatActivity {
         String type = i.getStringExtra("type");
         if(type.equals("en-in")){
             EnglishIndonesia data = i.getParcelableExtra("data");
-            getSupportActionBar().setTitle("Desciption");
+            getSupportActionBar().setTitle("Description");
             getSupportActionBar().setSubtitle(data.getKata());
             kata.setText(data.getKata());
             keterangan.setText(data.getKeterangan());
 
         }else if(type.equals("in-en")){
             IndonesiaEnglish data = i.getParcelableExtra("data");
-            getSupportActionBar().setTitle("Desciption");
+            getSupportActionBar().setTitle("Keterangan");
             getSupportActionBar().setSubtitle(data.getKata());
             kata.setText(data.getKata());
             keterangan.setText(data.getKeterangan());
