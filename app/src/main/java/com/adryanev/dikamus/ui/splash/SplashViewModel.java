@@ -34,10 +34,4 @@ public class SplashViewModel extends AndroidViewModel {
         return listKata;
     }
 
-    public boolean generateDatabase(){
-
-        return true;
-    }
-
-
 }
